@@ -47,10 +47,12 @@ puts "Creating Slot for january"
 my_time_slots = ["9h à 10h", "10h à 11h" ] #"8h à 9h", "11h à 12h", "14h à 15h", "15h à 16h", "16h à 17h", "17h à 18h"
 
 days = Day.all
-days.each do |day|
-  slot = Slot.create(time_slot: slot, nb_agent: 2)
-  slot.day = day
-  slot.save
+days.each do |myday|
+  my_time_slots.each do |time_slot|
+    slot = Slot.create(time_slot: time_slot, nb_agent: 2)
+    slot.day = myday
+    slot.save
+  end
 end
 
 puts "Slots are created"

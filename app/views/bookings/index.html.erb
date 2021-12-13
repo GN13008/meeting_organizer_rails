@@ -5,10 +5,13 @@
     <h1>Vous n'avez pas de prochains rendez vous</h1>
   <% else %>
     <h1>Voici vos prochains rendez vous : </h1>
-    <% @bookings.each do |booking| %>
-      <p>Le <%= booking.slot.date %> à <%= booking.slot.time_slot %></p>
-      <p>avec : <%= booking.user.name %></p>
-      <hr>
-    <% end %>
+    <div class="cards">
+      <% @bookings.each do |booking| %>
+        <div class="card">
+          <p>Le <%= booking.slot.day.date %> de <%= booking.slot.time_slot %></p>
+          <p>avec : <%= booking.user.name %></p>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>

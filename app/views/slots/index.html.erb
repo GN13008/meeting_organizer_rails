@@ -2,11 +2,18 @@
   <br>
   <h1>Voici les créneaux disponibles </h1>
   <br>
-  <% @slots.each do |slot| %>
-    <p>Le <%= slot.date %> de <%= slot.time_slot %></p>
-    <p>Nombre de place restante : <%= slot.nb_agent %></p>
-
-    <%= link_to "Selectionner", slot_bookings_path(slot), method: :post %>
+  <% @days.each do |day| %>
+    <br>
+    <%= day.date %>
+    <hr>
+    <div class="cards">
+    <% day.slots.where("nb_agent > 0").order(id: :asc).each do |slot| %>
+      <div class="card">
+        <p><%= slot.time_slot %></p>
+        <p><%= link_to "Selectionner (#{slot.nb_agent})", slot_bookings_path(slot), method: :post %></p>
+      </div>
+    <% end %>
+    </div>
     <hr>
   <% end %>
 </div>
