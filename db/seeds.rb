@@ -4,6 +4,7 @@ puts "----- Cleaning Database -----"
 Booking.destroy_all
 Slot.destroy_all
 Agent.destroy_all
+Day.destroy_all
 User.destroy_all
 
 puts "-------- Seeding in process --------"
@@ -28,45 +29,55 @@ client5 = User.create!(email: "yann@gmail.com", password: "password", name: "Cli
 
 puts "Users are created"
 
-puts "Creating Slot for january"
-# 
-my_time_slots = ["9h-10h", "10h-11h" ] #"8h-9h", "11h-12h", "14h-15h", "15h-16h", "16h-17h", "17h-18h"
-# first week of january
+puts "Creating Day for january"
+
 for n in 3..4 # not 4, 7 if I want the all first week
-  my_time_slots.each do |slot|
-    Slot.create!(date: "#{n}/01/2022", time_slot: slot, nb_agent: 2)
-  end
+  Day.create!(date: "#{n}/01/2022")
 end
+# first week of january
 # # second week of january
 # for n in 10..14
-#   my_time_slots.each do |slot|
-#     Slot.create!(date: "#{n}/01/2022", time_slot: slot, nb_agent: 2)
-#   end
+#   Slot.create!(date: "#{n}/01/2022", time_slot: slot, nb_agent: 2)
 # end
+
+puts "Slots are created"
+
+puts "Creating Slot for january"
+
+my_time_slots = ["9h à 10h", "10h à 11h" ] #"8h à 9h", "11h à 12h", "14h à 15h", "15h à 16h", "16h à 17h", "17h à 18h"
+
+days = Day.all
+days.each do |day|
+  slot = Slot.create(time_slot: slot, nb_agent: 2)
+  slot.day = day
+  slot.save
+end
 
 puts "Slots are created"
 
 puts "Creating booking"
 
 # one place left on monday 03
-lundi = Slot.where(date: "03/01/2022", time_slot: "10h-11h").first
+lundi = Day.where(date: "03/01/2022").first
+slotlundi = lundi.slots.where(time_slot: "10h à 11h").first
 booking = Booking.create
 booking.agent = agent1
-booking.slot = lundi
+booking.slot = slotlundi
 booking.user = client1
 booking.save
 
 # no place left on thuesday 04
-mardi = Slot.where(date: "04/01/2022", time_slot: "10h-11h").first
+mardi = Day.where(date: "04/01/2022").first
+slotmardi = mardi.slots.where(time_slot: "10h à 11h").first
 booking2 = Booking.create
 booking2.agent = agent1
-booking2.slot = mardi
+booking2.slot = slotmardi
 booking2.user = client2
 booking2.save
 
 booking3 = Booking.create
 booking3.agent = agent2
-booking3.slot = mardi
+booking3.slot = slotmardi
 booking3.user = client3
 booking3.save
 
