@@ -31,7 +31,7 @@ puts "Users are created"
 
 puts "Creating Day for january"
 
-for n in 3..4 # not 4, 7 if I want the all first week
+for n in 3..7 # not 4, 7 if I want the all first week
   Day.create!(date: "#{n}/01/2022")
 end
 # first week of january
@@ -44,7 +44,7 @@ puts "Slots are created"
 
 puts "Creating Slot for january"
 
-my_time_slots = ["9h à 10h", "10h à 11h" ] #"8h à 9h", "11h à 12h", "14h à 15h", "15h à 16h", "16h à 17h", "17h à 18h"
+my_time_slots = ["8h à 9h", "9h à 10h", "10h à 11h", "11h à 12h"] #, "14h à 15h", "15h à 16h", "16h à 17h", "17h à 18h"
 
 days = Day.all
 days.each do |myday|
