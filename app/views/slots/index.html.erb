@@ -1,0 +1,12 @@
+<div class="content">
+  <br>
+  <h1>Voici les créneaux disponibles </h1>
+  <br>
+  <% @slots.each do |slot| %>
+    <p>Le <%= slot.date %> de <%= slot.time_slot %></p>
+    <p>Nombre de place restante : <%= slot.nb_agent %></p>
+
+    <%= link_to "Selectionner", slot_bookings_path(slot), method: :post %>
+    <hr>
+  <% end %>
+</div>

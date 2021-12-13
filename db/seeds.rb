@@ -22,6 +22,8 @@ agent2.save
 client1 = User.create!(email: "sandra@gmail.com", password: "password", name: "Client Sandra")
 client2 = User.create!(email: "franck@gmail.com", password: "password", name: "Client Franck")
 client3 = User.create!(email: "lou@gmail.com", password: "password", name: "Client Lou")
+client4 = User.create!(email: "lea@gmail.com", password: "password", name: "Client lea")
+client5 = User.create!(email: "yann@gmail.com", password: "password", name: "Client yann")
 
 
 puts "Users are created"
@@ -53,25 +55,19 @@ booking.agent = agent1
 booking.slot = lundi
 booking.user = client1
 booking.save
-lundi.nb_agent = lundi.nb_agent - 1
-lundi.save
 
 # no place left on thuesday 04
 mardi = Slot.where(date: "04/01/2022", time_slot: "10h-11h").first
-booking = Booking.create
-booking.agent = agent1
-booking.slot = lundi
-booking.user = client1
-booking.save
-mardi.nb_agent = mardi.nb_agent - 1
-mardi.save
+booking2 = Booking.create
+booking2.agent = agent1
+booking2.slot = mardi
+booking2.user = client2
+booking2.save
 
-booking = Booking.create
-booking.agent = agent2
-booking.slot = lundi
-booking.user = client1
-booking.save
-mardi.nb_agent = mardi.nb_agent - 1
-mardi.save
+booking3 = Booking.create
+booking3.agent = agent2
+booking3.slot = mardi
+booking3.user = client3
+booking3.save
 
 puts "booking are done"

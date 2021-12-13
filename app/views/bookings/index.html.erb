@@ -1,0 +1,14 @@
+<div class="content">
+  <br>
+  <br>
+  <% if @bookings.length == 0 %>
+    <h1>Vous n'avez pas de prochains rendez vous</h1>
+  <% else %>
+    <h1>Voici vos prochains rendez vous : </h1>
+    <% @bookings.each do |booking| %>
+      <p>Le <%= booking.slot.date %> à <%= booking.slot.time_slot %></p>
+      <p>avec : <%= booking.user.name %></p>
+      <hr>
+    <% end %>
+  <% end %>
+</div>
