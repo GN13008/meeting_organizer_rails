@@ -2,8 +2,7 @@
   <br>
   <h1>Voici les créneaux disponibles </h1>
   <br>
-  <br>
-  <%= @display_day.date %>
+  <h3><%= @display_day.display_date %></h3>
   <hr>
   <div class="cards">
   <% @display_day.slots.where("nb_agent > 0").order(id: :asc).each do |slot| %>
@@ -14,20 +13,18 @@
   <% end %>
   </div>
   <hr>
-  <%# <div class="search-form-control form-group form-inline center-search"> %>
-    <%= form_with url: "/slots", method: :get, local: true, class:"form-inline", :remote => true  do |form| %>
-      <!-- Dropdown -->
-      <div class="form-group">
-        <%= form.select :day, @days.map {|day| day.date},
-          {
-            selected: "",
-            prompt: 'Changer de jour ?',
-          },
-          {class: "form-control little-margin-bottom"} %>
-      </div>
-      <div class="form-group pt-2">
-        <h3><%= form.submit "Actualiser", class: "btn btn-flat-search" %></h3>
-      </div>
-    <% end %>
-  <%# </div> %>
+  <%= form_with url: "/slots", method: :get, local: true, class:"form-inline", :remote => true  do |form| %>
+    <!-- Dropdown -->
+    <div class="form-group">
+      <%= form.select :day, @days.map {|day| [day.display_date, day.date]},
+        {
+          selected: "",
+          prompt: 'Changer de jour ?',
+        },
+        {class: "form-control little-margin-bottom"} %>
+    </div>
+    <div class="form-group pt-2">
+      <h3><%= form.submit "Actualiser", class: "btn btn-flat-search" %></h3>
+    </div>
+  <% end %>
 </div>

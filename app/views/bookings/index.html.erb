@@ -4,7 +4,7 @@
   <% if @bookings.length == 0 %>
     <p>Vous n'avez pas de rendez vous ce jour</p>
   <% else %>
-    <p>Vos rendez vous du <%= @display_day.date %> :</p>
+    <p>Vos rendez vous du <%= @display_day.display_date %> :</p>
     <div class="cards">
       <% @bookings.each do |booking| %>
         <div class="card">
@@ -18,7 +18,7 @@
   <%= form_with url: "/bookings", method: :get, local: true, class:"form-inline", :remote => true  do |form| %>
     <!-- Dropdown -->
     <div class="form-group">
-      <%= form.select :day, @days.map {|day| day.date},
+      <%= form.select :day, @days.map {|day| [day.display_date, day.date]},
         {
           selected: "",
           prompt: 'Jour à venir',
