@@ -1,6 +1,12 @@
 class BookingsController < ApplicationController
   def index
-    @bookings = Booking.where(agent_id: current_user.agent.id)
+    @days = Day.all.order(date: :asc)
+    @display_day = @days.first
+    # Quand le champs est renseigné
+    if params[:day].present?
+      @display_day = Day.where(date: params[:day].to_date).first
+    end
+    @bookings = @display_day.bookings.where(agent_id: current_user.agent.id)
   end
 
   def create

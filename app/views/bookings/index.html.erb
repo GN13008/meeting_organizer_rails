@@ -1,17 +1,32 @@
 <div class="content">
   <br>
-  <br>
+  <h1>Tableau de bord</h1>
   <% if @bookings.length == 0 %>
-    <h1>Vous n'avez pas de prochains rendez vous</h1>
+    <p>Vous n'avez pas de rendez vous ce jour</p>
   <% else %>
-    <h1>Voici vos prochains rendez vous : </h1>
+    <p>Vos rendez vous du <%= @display_day.date %> :</p>
     <div class="cards">
       <% @bookings.each do |booking| %>
         <div class="card">
-          <p>Le <%= booking.slot.day.date %> de <%= booking.slot.time_slot %></p>
-          <p>avec : <%= booking.user.name %></p>
+          <p><%= booking.user.name %></p>
+          <p>De <%= booking.slot.time_slot %></p>
         </div>
       <% end %>
+    </div>
+  <% end %>
+  <hr>
+  <%= form_with url: "/bookings", method: :get, local: true, class:"form-inline", :remote => true  do |form| %>
+    <!-- Dropdown -->
+    <div class="form-group">
+      <%= form.select :day, @days.map {|day| day.date},
+        {
+          selected: "",
+          prompt: 'Jour à venir',
+        },
+        {class: "form-control little-margin-bottom"} %>
+    </div>
+    <div class="form-group pt-2">
+      <h3><%= form.submit "Chercher", class: "btn btn-flat-search" %></h3>
     </div>
   <% end %>
 </div>
