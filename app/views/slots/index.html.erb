@@ -2,18 +2,32 @@
   <br>
   <h1>Voici les créneaux disponibles </h1>
   <br>
-  <% @days.each do |day| %>
-    <br>
-    <%= day.date %>
-    <hr>
-    <div class="cards">
-    <% day.slots.where("nb_agent > 0").order(id: :asc).each do |slot| %>
-      <div class="card">
-        <p><%= slot.time_slot %></p>
-        <p><%= link_to "Selectionner (#{slot.nb_agent})", slot_bookings_path(slot), method: :post %></p>
+  <br>
+  <%= @display_day.date %>
+  <hr>
+  <div class="cards">
+  <% @display_day.slots.where("nb_agent > 0").order(id: :asc).each do |slot| %>
+    <div class="card">
+      <p><%= slot.time_slot %></p>
+      <p><%= link_to "Selectionner (#{slot.nb_agent})", slot_bookings_path(slot), method: :post %></p>
+    </div>
+  <% end %>
+  </div>
+  <hr>
+  <%# <div class="search-form-control form-group form-inline center-search"> %>
+    <%= form_with url: "/slots", method: :get, local: true, class:"form-inline", :remote => true  do |form| %>
+      <!-- Dropdown -->
+      <div class="form-group">
+        <%= form.select :day, @days.map {|day| day.date},
+          {
+            selected: "",
+            prompt: 'Changer de jour ?',
+          },
+          {class: "form-control little-margin-bottom"} %>
+      </div>
+      <div class="form-group pt-2">
+        <h3><%= form.submit "Actualiser", class: "btn btn-flat-search" %></h3>
       </div>
     <% end %>
-    </div>
-    <hr>
-  <% end %>
+  <%# </div> %>
 </div>

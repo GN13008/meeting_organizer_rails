@@ -18,7 +18,7 @@ class BookingsController < ApplicationController
       flash.alert = "Votre réservation est confirmée"
       redirect_to booking_path(@booking)
     else
-      flash.alert = "echec"
+      flash.alert = "Echec de la réservation"
       redirect_to slots_path
     end
   end

@@ -11,20 +11,20 @@ puts "-------- Seeding in process --------"
 
 puts "Creating 5 users - 2 agents and 3 clients"
 
-user1 = User.create!(email: "gui@gmail.com", password: "password", name: "Agent Gui")
+user1 = User.create!(email: "gui@gmail.com", password: "password", name: "Gui (Agent)")
 agent1 = Agent.create
 agent1.user = user1
 agent1.save
-user2 = User.create!(email: "tom@gmail.com", password: "password", name: "Agent Tom") 
+user2 = User.create!(email: "tom@gmail.com", password: "password", name: "Tom (Agent)") 
 agent2 = Agent.create
 agent2.user = user2
 agent2.save
 
-client1 = User.create!(email: "sandra@gmail.com", password: "password", name: "Client Sandra")
-client2 = User.create!(email: "franck@gmail.com", password: "password", name: "Client Franck")
-client3 = User.create!(email: "lou@gmail.com", password: "password", name: "Client Lou")
-client4 = User.create!(email: "lea@gmail.com", password: "password", name: "Client lea")
-client5 = User.create!(email: "yann@gmail.com", password: "password", name: "Client yann")
+client1 = User.create!(email: "sandra@gmail.com", password: "password", name: "Sandra (Client)")
+client2 = User.create!(email: "franck@gmail.com", password: "password", name: "Franck (Client)")
+client3 = User.create!(email: "lou@gmail.com", password: "password", name: "Lou (Client)")
+client4 = User.create!(email: "lea@gmail.com", password: "password", name: "lea (Client)")
+client5 = User.create!(email: "yann@gmail.com", password: "password", name: "yann (Client)")
 
 
 puts "Users are created"
